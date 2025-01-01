@@ -46,6 +46,14 @@ const Holders = sequelize.define(
         key: "id",
       },
     },
+    parent_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "holders", // 表名稱，區分大小寫
+        key: "id",
+      },
+    },
   },
   {
     tableName: "holders", // 指定資料表名稱
@@ -61,6 +69,10 @@ Holders.hasOne(Holders, {
 Holders.hasOne(Holders, {
   as: "rightChild",
   foreignKey: "right_child",
+});
+Holders.hasOne(Holders, {
+  as: "parent",
+  foreignKey: "parent_id",
 });
 Holders.belongsTo(Holders, {
   as: "ref",

@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/api/v1/holders", async (req, res, next) => {
+app.post("/api/policyholders", async (req, res, next) => {
   const { name, referrer, date } = req.body;
 
   let position = null;
@@ -18,6 +18,7 @@ app.post("/api/v1/holders", async (req, res, next) => {
   const newHolder = await Holders.create({
     name,
     referrer,
+    parent_id: position ? position.root["id"] : null,
     date,
   });
 
@@ -29,9 +30,8 @@ app.post("/api/v1/holders", async (req, res, next) => {
   res.status(201).json(newHolder);
 });
 
-app.get("/api/v1/holder/:id", async (req, res, next) => {
-  const { id } = req.params;
-  console.log(id);
+app.get("/api/policyholders", async (req, res, next) => {
+  const { id } = req.query;
 
   const subtreeData = await query.getSubtreeData(id);
   if (!subtreeData) {
@@ -40,7 +40,8 @@ app.get("/api/v1/holder/:id", async (req, res, next) => {
 
   res.status(200).json(subtreeData);
 });
-app.get("/api/v1/holders", (req, res, next) => {});
+
+app.get("/api/policyholders/:id/top", (req, res, next) => {});
 
 app.get("/api/v1/reset", (req, res, next) => {
   (async () => {
