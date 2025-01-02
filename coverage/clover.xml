@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735796790010" clover="3.2.0">
-  <project timestamp="1735796790010" name="All files">
-    <metrics statements="86" coveredstatements="84" conditionals="32" coveredconditionals="31" methods="9" coveredmethods="9" elements="127" coveredelements="124" complexity="0" loc="86" ncloc="86" packages="6" files="6" classes="6"/>
+<coverage generated="1735797095728" clover="3.2.0">
+  <project timestamp="1735797095728" name="All files">
+    <metrics statements="85" coveredstatements="83" conditionals="32" coveredconditionals="31" methods="8" coveredmethods="8" elements="125" coveredelements="122" complexity="0" loc="85" ncloc="85" packages="6" files="6" classes="6"/>
     <package name="organization_system">
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="D:\organization_system\app.js">
@@ -26,9 +26,9 @@
       </file>
     </package>
     <package name="organization_system.controller">
-      <metrics statements="36" coveredstatements="35" conditionals="16" coveredconditionals="16" methods="5" coveredmethods="5"/>
+      <metrics statements="35" coveredstatements="34" conditionals="16" coveredconditionals="16" methods="4" coveredmethods="4"/>
       <file name="holderController.js" path="D:\organization_system\controller\holderController.js">
-        <metrics statements="36" coveredstatements="35" conditionals="16" coveredconditionals="16" methods="5" coveredmethods="5"/>
+        <metrics statements="35" coveredstatements="34" conditionals="16" coveredconditionals="16" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -62,9 +62,8 @@
         <line num="59" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
       </file>
     </package>
     <package name="organization_system.models">
