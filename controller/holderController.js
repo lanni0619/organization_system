@@ -29,6 +29,21 @@ const getSubtree = async (req, res, next) => {
   const { id } = req.query;
 
   const subtreeData = await query.getSubtreeData(id);
+
+  if (!subtreeData) {
+    return res.status(404).json({ error: "Policyholder not found" });
+  }
+
+  res.status(200).json(subtreeData);
+};
+
+const getParent = async (req, res, next) => {
+  const { id } = req.params;
+
+  const holder = await Holders.findByPk(id);
+
+  const subtreeData = await query.getSubtreeData(holder.parent_id);
+
   if (!subtreeData) {
     return res.status(404).json({ error: "Policyholder not found" });
   }
@@ -52,6 +67,7 @@ const resetDB = (req, res, next) => {
 module.exports = {
   createHolder,
   getSubtree,
+  getParent,
   resetDB,
 };
 

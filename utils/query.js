@@ -38,10 +38,8 @@ async function getSubtreeData(id) {
     name: node.name,
     date: node.date,
     referrer: node.referrer,
-    children: {
-      left: leftChild,
-      right: rightChild,
-    },
+    left: leftChild,
+    right: rightChild,
   };
 }
 

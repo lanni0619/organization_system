@@ -7,7 +7,7 @@ router
   .post("/", holderController.createHolder)
   .get("/", holderController.getSubtree);
 
-router.get("/:id/top");
+router.get("/:id/top", holderController.getParent);
 
 router.get("/resetDB", holderController.resetDB);
 
