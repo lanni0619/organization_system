@@ -12,17 +12,14 @@ const Holders = sequelize.define(
     name: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      comment: "Name of holder",
     },
     date: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-      comment: "Join date",
     },
     referrer: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "referrer's ID",
       references: {
         model: "holders",
         key: "id",
@@ -31,18 +28,16 @@ const Holders = sequelize.define(
     left_child: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "Left child's ID",
       references: {
-        model: "holders", // 表名稱，區分大小寫
+        model: "holders",
         key: "id",
       },
     },
     right_child: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "Right child's ID",
       references: {
-        model: "holders", // 表名稱，區分大小寫
+        model: "holders",
         key: "id",
       },
     },
@@ -50,15 +45,22 @@ const Holders = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: "holders", // 表名稱，區分大小寫
+        model: "holders",
         key: "id",
       },
     },
   },
   {
-    tableName: "holders", // 指定資料表名稱
-    timestamps: false, // 不使用 createdAt 和 updatedAt 欄位
-    comment: "Holders data",
+    tableName: "holders",
+    timestamps: false,
+    hooks: {
+      beforeCreate: async (holder) => {
+        const count = await Holders.count();
+        if (count > 0 && holder.referrer == null) {
+          throw new Error("Non-root nodes must have a valid referrerId.");
+        }
+      },
+    },
   }
 );
 
