@@ -1,6 +1,10 @@
 const Holder = require("../models/Holders");
 
-// DFS
+/*
+Method: PostOrder DFS 
+Input: root's ID (type: number)
+return: numbers of subtree (type: number)
+*/
 async function getSubtreeCount(rootId) {
   if (!rootId) return 0;
   const root = await Holder.findByPk(rootId);
@@ -9,7 +13,11 @@ async function getSubtreeCount(rootId) {
   return 1 + leftCount + rightCount;
 }
 
-// Find new node's position
+/*
+Method: check left and right child amount in each level until find the empty node.
+Input: root's ID (type: number)
+return: object{root, side}, root = new node's parent, side = position
+*/
 async function findPosition(rootId) {
   const root = await Holder.findByPk(rootId);
   const leftCount = await getSubtreeCount(root.left_child);
@@ -24,6 +32,11 @@ async function findPosition(rootId) {
   }
 }
 
+/*
+Method: PostOrder DFS 
+Input: root's ID (type: number)
+return: object{} or null if invalid id
+*/
 async function getSubtreeData(id) {
   if (!id) return null;
 
@@ -40,6 +53,7 @@ async function getSubtreeData(id) {
     referrer: node.referrer,
     left: leftChild,
     right: rightChild,
+    parent_id: node.parent_id,
   };
 }
 

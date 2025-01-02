@@ -4,6 +4,10 @@ const query = require("../utils/query");
 
 const createHolder = async (req, res, next) => {
   const { name, referrer, date } = req.body;
+  const count = await Holders.count();
+
+  if (!name || !date || (count > 0 && !referrer))
+    return res.status(401).json("Invalid name, date or referrer");
 
   let position = null;
   if (referrer) {
@@ -51,17 +55,13 @@ const getParent = async (req, res, next) => {
   res.status(200).json(subtreeData);
 };
 
-const resetDB = (req, res, next) => {
-  (async () => {
-    try {
-      await sequelize.sync({ force: true }); // { force: true } {alter: true}
-      res.status(200).json("Force reset table successfully");
-    } catch (error) {
-      console.error("Fail to sync:", error);
-    } finally {
-      await sequelize.close();
-    }
-  })();
+const resetDB = async (req, res, next) => {
+  try {
+    await sequelize.sync({ force: true }); // { force: true } {alter: true}
+    res.status(200).json("Force reset table successfully");
+  } catch (error) {
+    console.error("Fail to sync:", error);
+  }
 };
 
 module.exports = {
